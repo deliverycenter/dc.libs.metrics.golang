@@ -5,15 +5,15 @@
 dcmetrics "github.com/deliverycenter/dc.libs.metrics.golang"
 ```
 
-# Usage
+## Usage
 The first step to use the package is to call the function `Setup`. This is where the global parameters for the logger will be set and used in every metrics call.
 
 ```
 err := dcmetrics.Setup("METRICTS_GRPC_SERVER_ADDRESS", "DEVELOPMENT", "MY_PACKAGE", dcmetrics.Metrics{
-		Direction:        "INCOMING",
-		SourceType:       "PROVIDER",
-		RootResourceType: "PRODUCT",
-	})
+	Direction:        "INCOMING",
+	SourceType:       "PROVIDER",
+	RootResourceType: "PRODUCT",
+})
 ```
 
 
