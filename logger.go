@@ -17,22 +17,18 @@ type Logger struct {
 	metricsDefault Metrics
 }
 
-// Debug logs a message at level Debug.
 func (l *Logger) Debug(message string, metrics Metrics) {
 	l.log("DEBUG", message, metrics)
 }
 
-// Info logs a message at level Info.
 func (l *Logger) Info(message string, metrics Metrics) {
 	l.log("INFO", message, metrics)
 }
 
-// Warn logs a message at level Warn.
 func (l *Logger) Warn(message string, metrics Metrics) {
 	l.log("WARN", message, metrics)
 }
 
-// Error logs a message at level Error.
 func (l *Logger) Error(message string, metrics Metrics) {
 	l.log("ERROR", message, metrics)
 }
