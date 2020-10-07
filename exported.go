@@ -1,6 +1,7 @@
 package dc_metrics
 
 import (
+	"github.com/deliverycenter/dc.libs.metrics.golang/protos"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 )
@@ -20,7 +21,7 @@ func Setup(address, environment, caller string, metrics Metrics) (err error) {
 		environment:    environment,
 		caller:         caller,
 		conn:           conn,
-		client:         NewMetricsServiceClient(conn),
+		client:         protos.NewMetricsServiceClient(conn),
 		metricsDefault: metrics,
 	}
 

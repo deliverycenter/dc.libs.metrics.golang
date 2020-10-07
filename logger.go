@@ -3,6 +3,7 @@ package dc_metrics
 import (
 	"context"
 
+	"github.com/deliverycenter/dc.libs.metrics.golang/protos"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
@@ -12,7 +13,7 @@ type Logger struct {
 	environment    string
 	caller         string
 	conn           *grpc.ClientConn
-	client         MetricsServiceClient
+	client         protos.MetricsServiceClient
 	metricsDefault Metrics
 }
 
@@ -74,7 +75,7 @@ func (l *Logger) logToStdout(metrics Metrics) {
 func (l *Logger) logToMetricsApi(metrics Metrics) {
 	l.setDefaults(&metrics)
 
-	metricsRequest := &WriteMetricsRequest{
+	metricsRequest := &protos.WriteMetricsRequest{
 		CorrelationId:     metrics.correlationId(),
 		Environment:       l.environment,
 		Level:             metrics.Level,
