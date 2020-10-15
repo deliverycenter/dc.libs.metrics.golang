@@ -8,11 +8,11 @@ var (
 	lg *Logger
 )
 
-func Setup(pubsubProjectId string, pubSubTopicName string, environment string, caller string, metrics Metrics) (err error) {
+func Setup(googleProjectId string, pubSubTopicName string, environment string, caller string, metrics Metrics) (err error) {
 	lg = &Logger{
 		environment:    environment,
 		caller:         caller,
-		client:         dcpubsub.New(pubsubProjectId, pubSubTopicName),
+		client:         dcpubsub.New(googleProjectId, pubSubTopicName),
 		metricsDefault: metrics,
 	}
 
