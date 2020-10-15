@@ -1,5 +1,12 @@
 # dc.libs.metrics.golang
 
+Golang implementation for DeliveryCenter's structured logging format.
+
+> This package is part of a family of libraries that implement DeliveryCenter's metrics pattern  for different languages. 
+Check also our [Elixir](https://github.com/deliverycenter/dc.libs.metrics.elixir), 
+>[Node](https://github.com/deliverycenter/dc.libs.metrics.node) and 
+>[Ruby](https://github.com/deliverycenter/dc.libs.metrics.ruby) versions.
+
 ## Import
 ```
 dcmetrics "github.com/deliverycenter/dc.libs.metrics.golang"
