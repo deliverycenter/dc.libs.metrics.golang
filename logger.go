@@ -1,19 +1,19 @@
 package dc_metrics
 
 import (
-	"context"
+	"github.com/golang/protobuf/proto"
+
+	dcpubsub "github.com/deliverycenter/dc.libs.metrics.golang/pubsub"
 
 	"github.com/deliverycenter/dc.libs.metrics.golang/protos"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/sirupsen/logrus"
-	"google.golang.org/grpc"
 )
 
 type Logger struct {
 	environment    string
 	caller         string
-	conn           *grpc.ClientConn
-	client         protos.MetricsServiceClient
+	client         *dcpubsub.PubSub
 	metricsDefault Metrics
 }
 
@@ -92,9 +92,15 @@ func (l *Logger) logToMetricsApi(metrics Metrics) {
 		ErrorCode:         metrics.ErrorCode,
 	}
 
-	_, err := l.client.WriteMetrics(context.Background(), metricsRequest)
+	encodedMessage, err := proto.Marshal(metricsRequest)
 	if err != nil {
-		logrus.WithError(err).Error("failed to write dc_metrics metrics")
+		logrus.WithError(err).Error("failed to marshal metricsRequest as proto message")
+		return
+	}
+
+	_, err = l.client.Publish(encodedMessage)
+	if err != nil {
+		logrus.WithError(err).Error("failed to publish message to pubsub")
 	}
 }
 
