@@ -95,6 +95,7 @@ func (l *Logger) logToMetricsApi(metrics Metrics) {
 	encodedMessage, err := proto.Marshal(metricsRequest)
 	if err != nil {
 		logrus.WithError(err).Error("failed to marshal metricsRequest as proto message")
+		return
 	}
 
 	result, err := l.client.Publish(encodedMessage)
