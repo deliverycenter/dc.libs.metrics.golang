@@ -1,27 +1,18 @@
 package dc_metrics
 
 import (
-	"github.com/deliverycenter/dc.libs.metrics.golang/protos"
-	"github.com/pkg/errors"
-	"google.golang.org/grpc"
+	dcpubsub "github.com/deliverycenter/dc.libs.metrics.golang/pubsub"
 )
 
 var (
 	lg *Logger
 )
 
-func Setup(address, environment, caller string, metrics Metrics) (err error) {
-	// Set up a connection to the dc_metrics server.
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
-	if err != nil {
-		return errors.Wrap(err, "couldn't connect to dc_metrics server")
-	}
-
+func Setup(pubsubProjectId string, pubSubTopicName string, environment string, caller string, metrics Metrics) (err error) {
 	lg = &Logger{
 		environment:    environment,
 		caller:         caller,
-		conn:           conn,
-		client:         protos.NewMetricsServiceClient(conn),
+		client:         dcpubsub.New(pubsubProjectId, pubSubTopicName),
 		metricsDefault: metrics,
 	}
 
@@ -46,9 +37,4 @@ func Warn(message string, metrics Metrics) {
 // Error logs a message at level Error.
 func Error(message string, metrics Metrics) {
 	lg.Error(message, metrics)
-}
-
-// Close closes the connection to the dc_metrics server.
-func Close() error {
-	return lg.conn.Close()
 }
