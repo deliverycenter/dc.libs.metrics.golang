@@ -98,11 +98,10 @@ func (l *Logger) logToMetricsApi(metrics Metrics) {
 		return
 	}
 
-	result, err := l.client.Publish(encodedMessage)
+	_, err = l.client.Publish(encodedMessage)
 	if err != nil {
-		logrus.WithError(err).Error("failed to write dc_metrics metrics")
+		logrus.WithError(err).Error("failed to publish message to pubsub")
 	}
-	logrus.Debug(result)
 }
 
 func (l *Logger) setDefaults(metrics *Metrics) {
