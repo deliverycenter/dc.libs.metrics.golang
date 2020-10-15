@@ -8,7 +8,6 @@ require (
 	github.com/googleapis/gax-go v1.0.3 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.7.0
-	github.com/stretchr/testify v1.4.0
 	go.opencensus.io v0.22.5 // indirect
 	google.golang.org/api v0.33.0 // indirect
 	google.golang.org/grpc v1.32.0
