@@ -15,6 +15,7 @@ type Logger struct {
 	caller         string
 	client         *dcpubsub.PubSub
 	metricsDefault Metrics
+	disabled       bool
 }
 
 func (l *Logger) Debug(message string, metrics Metrics) {
@@ -35,6 +36,10 @@ func (l *Logger) Error(message string, metrics Metrics) {
 
 // Log logs a message to both stdout and metrics API
 func (l *Logger) log(level string, message string, metrics Metrics) {
+	if l.disabled {
+		return
+	}
+
 	metrics.Level = level
 	metrics.Message = message
 

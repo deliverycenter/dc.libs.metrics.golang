@@ -19,6 +19,12 @@ func Setup(googleProjectId string, pubSubTopicName string, environment string, c
 	return nil
 }
 
+func Disable() {
+	lg = &Logger{
+		disabled: true,
+	}
+}
+
 // Debug logs a message at level Debug.
 func Debug(message string, metrics Metrics) {
 	lg.Debug(message, metrics)
