@@ -15,7 +15,7 @@ dcmetrics "github.com/deliverycenter/dc.libs.metrics.golang"
 ## Usage
 The first step to use the package is to call the function `Setup`. This is where the global parameters for the logger will be set and used in every metrics call.
 
-```
+```go
 err := dcmetrics.Setup("GOOGLE_PROJECT_ID", "PUBSUB_TOPIC_NAME", "DEVELOPMENT", "MY_PACKAGE", dcmetrics.Metrics{
 	Direction:        "INCOMING",
 	SourceType:       "PROVIDER",
@@ -26,7 +26,7 @@ err := dcmetrics.Setup("GOOGLE_PROJECT_ID", "PUBSUB_TOPIC_NAME", "DEVELOPMENT", 
 
 After the call to `Setup`, the logging functions can be used: `Debug()`, `Info()`, `Warn()`, `Error()`.
 
-```
+```go
 dcmetrics.Info("request published", dcmetrics.Metrics{
 	SourceName:        "PROVIDER_NAME",
 	Action:            "REQUEST_PUBLISHED",
@@ -36,3 +36,11 @@ dcmetrics.Info("request published", dcmetrics.Metrics{
 	ExtRootResourceID: "abcde",
 })
 ```
+
+### Disable logs
+
+If you need to disable the package behavior (for testing, for example), you can use:
+
+```go
+dcmetrics.Disable()
+``` 
