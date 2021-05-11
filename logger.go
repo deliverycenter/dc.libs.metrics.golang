@@ -70,7 +70,16 @@ func (l *Logger) logToStdout(metrics Metrics) {
 		"IntStoreId":        metrics.IntStoreID,
 		"ErrorCode":         metrics.ErrorCode,
 	})
-	logger.Info(metrics.Message)
+	switch metrics.level {
+	case "DEBUG":
+		logger.Debug(metrics.Message)
+	case "WARN":
+		logger.Warn(metrics.Message)
+	case "ERROR":
+		logger.Error(metrics.Message)
+	default:
+		logger.Info(metrics.Message)
+	}
 }
 
 func (l *Logger) logToMetricsApi(metrics Metrics) {
