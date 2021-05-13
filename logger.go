@@ -70,7 +70,7 @@ func (l *Logger) logToStdout(metrics Metrics) {
 		"IntStoreId":        metrics.IntStoreID,
 		"ErrorCode":         metrics.ErrorCode,
 	})
-	switch metrics.level {
+	switch metrics.Level {
 	case "DEBUG":
 		logger.Debug(metrics.Message)
 	case "WARN":
